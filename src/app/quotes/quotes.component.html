@@ -5,15 +5,15 @@
   <div class="row">
     <div class="col-md-6">
       <div *ngFor="let quote of sortQuotes let i= index" class="quote-body">
-        <h4 class="text-primary title" appHighlightQoute>{{quote.quoteTitle}}</h4>
+        <p appHighlight *ngIf="highestUpvote()===quote.upvote && quote.upvote>0">{{quote.quoteInfo}}</p>
+        <p  *ngIf="highestUpvote()!==quote.upvote || quote.upvote===0">{{quote.quoteInfo}}</p>
         <p class="quote-info">{{quote.quoteInfo}}</p>
         <div class="votes">
-          <div></div>
+          <div ></div>
         </div>
         <app-quotes-details *ngIf='quote' bind-quoty='quote' (isRead)='quoteDelete($event,i)'>
         </app-quotes-details>
-        <span class="card-subtitle mb-2">Posted by: <span id="name">{{quote.name}} </span> <span id="date">on: <span
-              id="datecolor">{{quote.datePosted|date:'short'}}</span></span></span>
+        <span class="card-subtitle mb-2">Posted by: <span id="name">{{quote.name}} </span><span id="timePosted">{{quote.datePosted | datecount}}</span>: <span id="date">{{quote.datePosted | date}} </span></span>
       </div>
       <div class="col-md-8">
       </div>
